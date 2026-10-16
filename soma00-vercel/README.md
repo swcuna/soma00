@@ -40,7 +40,7 @@ npm run dev
 
 ## Approved reference and preferences
 
-Use https://soma00-dexterity-demo.shanelai.chatgpt.site as the authoritative reference for soma00.com. Match its layout, typography, copy, assets, animations, video controls, and responsive behavior. Do not introduce a separate mobile design or force a desktop-width viewport. This supersedes the earlier fixed-width mobile request.
+Use https://soma00-dexterity-demo.shanelai.chatgpt.site as the authoritative reference for soma00.com. Preserve its desktop visual identity, typography, copy, assets, animations, and video controls. Adapt the mobile layout intentionally for readable sizing, full video framing, comfortable touch controls, and balanced spacing. Mobile usability takes precedence over copying the demo exactly. Never force a desktop-width viewport. Every website change must include mobile layout verification at narrow and wide phone widths, plus a desktop regression check. This supersedes the earlier instruction to copy the demo’s mobile layout exactly.
 
 The site uses the demo's self-hosted Inter fonts, original media, responsive styles, scroll-driven opening, demonstration tabs, and full-film dialog. Keep keyboard tab navigation, reduced-motion handling, and playback controls working. Explain exact code/configuration changes when updating the site.
 
