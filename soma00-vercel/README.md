@@ -39,3 +39,7 @@ npm run dev
 - `public/`: logo, photos, and videos
 
 The hero video autoplays and loops with muted audio. Video controls allow visitors to pause or enable sound.
+
+## Brand assets
+
+The website uses the supplied SOMA handoff assets: Spartan 400 and 600 in `public/fonts/`, and the original `public/soma-logo.png` (inverted on dark surfaces as in the handoff CSS). The palette follows the handoff: background `#08090a`, surface `#101113`, text `#e9e9e7`, muted text `#999b9e`, and accent `#7777f2`. Fonts are self-hosted using `next/font/local`.
