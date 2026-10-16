@@ -38,8 +38,10 @@ npm run dev
 - `app/layout.tsx`: page metadata and fonts
 - `public/`: logo, photos, and videos
 
-The hero video autoplays and loops with muted audio. Video controls allow visitors to pause or enable sound.
+## Approved reference and preferences
 
-## Brand assets
+Use https://soma00-dexterity-demo.shanelai.chatgpt.site as the authoritative reference for soma00.com. Match its layout, typography, copy, assets, animations, video controls, and responsive behavior. Do not introduce a separate mobile design or force a desktop-width viewport. This supersedes the earlier fixed-width mobile request.
 
-The website uses the supplied SOMA handoff assets: Spartan 400 and 600 in `public/fonts/`, and the original `public/soma-logo.png` (inverted on dark surfaces as in the handoff CSS). The palette follows the handoff: background `#08090a`, surface `#101113`, text `#e9e9e7`, muted text `#999b9e`, and accent `#7777f2`. Fonts are self-hosted using `next/font/local`.
+The site uses the demo's self-hosted Inter fonts, original media, responsive styles, scroll-driven opening, demonstration tabs, and full-film dialog. Keep keyboard tab navigation, reduced-motion handling, and playback controls working. Explain exact code/configuration changes when updating the site.
+
+Build and deployment commands remain unchanged: `npm run build` and the existing GitHub-connected Vercel deployment. Application source is in `soma00-vercel/` within the GitHub repository.
