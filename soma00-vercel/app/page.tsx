@@ -157,7 +157,7 @@ export default function Home() {
       </section>
       <section className="closing section-shell" id="vision">
         <p className="eyebrow"><span className="status-dot" /> Our horizon</p>
-        <h2>your full-stack intelligence<br /><span>in one go.</span></h2>
+        <h2>Your full-stack intelligence<br /><span>in one go.</span></h2>
         <div className="closing-bottom"><p>More capable hands.<br />More possibilities ahead.</p><a href={contact} className="contact-link">Build with SOMA <Arrow /></a></div>
       </section>
     </main>
