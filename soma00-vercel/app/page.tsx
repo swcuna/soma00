@@ -1,22 +1,24 @@
 import ScrollHero from './scroll-hero';
+import DemoShowcase from './demo-showcase';
 
 const contact = 'mailto:yanjie@somastacks.com?subject=SOMA00%20inquiry';
-const capabilities = [
-  ['01', 'Control frequency', 'State-of-the-art control frequency for the precision that dexterous manipulation demands.', 'dexterity'],
-  ['02', 'Human-like dexterity', 'A human-like setup that brings rich, nuanced movement to the physical world.', 'hero'],
-  ['03', 'Versatile manipulation', 'Greater dexterity opens up a wider variety of tasks, objects, and interactions.', 'placement'],
-  ['04', 'Real-world intelligence', 'Powering robotics with the intelligence they need to navigate the real world.', 'coordination'],
-];
+
 export default function Home() {
- return <>
-  <a className="skip" href="#main">Skip to content</a>
-  <header className="header wrap"><a className="wordmark" href="#top" aria-label="SOMA home"><img src="/soma-logo.png" alt="SOMA" width="160" height="115"/></a><nav aria-label="Main navigation"><a href="#capabilities">Capabilities</a><a href="#in-action">In action</a><a href="#vision">Our vision</a></nav><a className="outline" href={contact}>Get in touch</a></header>
-  <main id="main">
-   <ScrollHero/>
-   <section className="section wrap" id="capabilities"><p className="eyebrow">Capabilities</p><div className="section-intro"><h2>More human in movement.<br/>More possibility in every task.</h2><p>Precision, dexterity, and versatility.<br/>The foundation for robotics in a world built for people.</p></div><div className="capabilities">{capabilities.map(([n,title,copy])=><article className="capability" key={n}><span className="index">{n}</span><h3>{title}</h3><p>{copy}</p><span className="row-label">SOMA00</span></article>)}</div></section>
-   <section className="section wrap" id="in-action"><p className="eyebrow">In action</p><div className="section-intro"><h2>The detail makes<br/>the difference.</h2><p>From delicate movements to coordinated handling.<br/>Explore dexterous manipulation in action.</p></div><div className="demos">{[['dexterity','18ms control latency'],['placement','1:1 mapping and hand control'],['coordination','Coordinated manipulation']].map(([src,title],i)=><figure key={src}><video controls playsInline preload="none" poster={'/media/'+src+'.jpg'} aria-label={title+' demonstration'}><source src={'/media/'+src+'.mp4'} type="video/mp4"/>Your browser does not support video playback.</video><figcaption><span className="index">0{i+1}</span><h3>{title}</h3></figcaption></figure>)}</div></section>
-   <section className="section vision wrap" id="vision"><div><p className="eyebrow">Our vision</p><h2>Intelligence that belongs in the real world.</h2><p>Powering robotics with the intelligence they need to navigate the real world.</p><p>SOTA dexterity powered by our proprietary system of methods. Human-like by design.</p><a className="text-link" href={contact}>Build with SOMA <span aria-hidden="true">↗</span></a></div><figure><img src="/media/coordination.jpg" alt="Robotic hands manipulating an object together" loading="lazy"/><figcaption>FIG. 02 — COORDINATED MANIPULATION</figcaption></figure></section>
-   <section className="contact section wrap"><h2>Human motion,<br/>embodied.</h2><p>Bring your next manipulation challenge.<br/>Let’s explore what’s possible with SOMA00.</p><a className="button" href={contact}>Talk to our team <span aria-hidden="true">↗</span></a></section>
-  </main><footer className="wrap"><div><a className="wordmark" href="#top" aria-label="SOMA home"><img src="/soma-logo.png" alt="SOMA" width="160" height="115"/></a><p>© 2026 SOMA. All rights reserved.</p></div><a href="#capabilities">Capabilities</a><a href="#in-action">In action</a><a href={contact}>Contact</a></footer>
- </>;
+  return <>
+    <a className="skip" href="#main">Skip to content</a>
+    <main id="main">
+      <ScrollHero/>
+      <section className="introduction wrap" id="introduction" aria-labelledby="intro-title">
+        <div><p className="eyebrow">SOMA00 / Dexterous intelligence</p><h2 id="intro-title">A world built for people.<br/><span>Within reach of robots.</span></h2></div>
+        <div className="intro-detail"><p>The everyday world asks a lot of a pair of hands. We’re bringing that dexterity to robotics.</p><a className="text-link" href="#in-action">See it in action <span aria-hidden="true">↗</span></a></div>
+      </section>
+      <DemoShowcase/>
+      <section className="vision wrap" id="vision" aria-labelledby="vision-title">
+        <p className="eyebrow">Our ambition</p>
+        <h2 id="vision-title">Intelligence,<br/><span>out in the world.</span></h2>
+        <div className="vision-bottom"><p>More capable hands.<br/>More possibilities ahead.</p><a className="text-link" href={contact}>Build with SOMA <span aria-hidden="true">↗</span></a></div>
+      </section>
+    </main>
+    <footer className="wrap"><a className="wordmark" href="#top" aria-label="SOMA home"><img src="/soma-logo.png" alt="SOMA" width="480" height="345"/></a><p>© 2026 SOMA</p><a href={contact}>Get in touch <span aria-hidden="true">↗</span></a></footer>
+  </>;
 }
