@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 
@@ -10,6 +10,14 @@ const spartan = localFont({
   variable: '--font-spartan',
   display: 'swap',
 });
+
+// Render the desktop layout on phones and let the browser scale it to fit.
+// Omit Next.js's default initial-scale=1 so the full width is visible on load.
+export const viewport: Viewport = {
+  width: 1280,
+  initialScale: undefined,
+  userScalable: true,
+};
 
 export const metadata: Metadata = {
   icons: { icon: '/soma-logo.png' },
