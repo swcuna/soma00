@@ -130,7 +130,7 @@ export default function Home() {
         <p className="eyebrow">SOMA00 / Dexterous intelligence</p>
         <div className="intro-grid">
           <h2>A world built for people.<br /><span>Within reach of robots.</span></h2>
-          <div className="intro-aside"><p>The everyday world asks a lot of a pair of hands. We’re bringing that dexterity to robotics.</p><a href="#in-action" className="text-link">See it in motion <Arrow /></a></div>
+          <div className="intro-aside"><p>We bring state-of-the-art dexterity to real-world robots—turning capability into value.</p><a href="#in-action" className="text-link">See it in motion <Arrow /></a></div>
         </div>
       </section>
       <section className="demonstrations" id="in-action" ref={demonstrations}>
