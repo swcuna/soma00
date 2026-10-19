@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  icons: { icon: '/soma-logo.png' },
   title: 'SOMA00 — Dexterity for the real world',
   description: 'Human-like dexterity for a world built for people. See SOMA00 translate human movement into robotic possibility.',
 };

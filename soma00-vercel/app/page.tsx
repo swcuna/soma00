@@ -21,6 +21,7 @@ export default function Home() {
   const opening = useRef<HTMLVideoElement>(null);
   const demonstrations = useRef<HTMLElement>(null);
   const demonstration = useRef<HTMLVideoElement>(null);
+  const requestedPlayback = useRef(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const fullFilm = useRef<HTMLVideoElement>(null);
   const filmTrigger = useRef<HTMLButtonElement>(null);
@@ -68,7 +69,7 @@ export default function Home() {
     if (!video || !loadDemos) return;
     video.load();
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !reducedMotion) video.play().catch(() => setDemoPaused(true));
+      if (entry.isIntersecting && (!reducedMotion || requestedPlayback.current)) video.play().catch(() => setDemoPaused(true));
       else video.pause();
     }, { threshold: 0.3 });
     observer.observe(video);
@@ -142,16 +143,34 @@ export default function Home() {
             </video>
             <button className="round-button demo-play" onClick={() => toggleVideo(demonstration.current)} aria-label={demoPaused ? 'Play demonstration' : 'Pause demonstration'}><PlayIcon paused={demoPaused} /></button>
           </div>
-          <div className="demo-tabs" role="tablist" aria-label="Choose a demonstration">
-            {demos.map((demo, index) => <button key={demo.file} id={`demo-tab-${index}`} role="tab" aria-selected={selected === index} aria-controls="demo-panel" tabIndex={selected === index ? 0 : -1} className={selected === index ? 'demo-tab active' : 'demo-tab'} onClick={() => setSelected(index)} onKeyDown={event => {
-              if (['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) {
-                event.preventDefault();
-                const next = event.key === 'Home' ? 0 : event.key === 'End' ? 2 : (index + (event.key === 'ArrowRight' ? 1 : 2)) % 3;
-                setSelected(next);
-                document.getElementById(`demo-tab-${next}`)?.focus();
-              }
-            }}><span className="tab-category"><span>0{index + 1}</span>{demo.category}</span><span className="tab-name">{demo.name}<Arrow /></span><span className="tab-detail">{demo.copy}</span></button>)}
-          </div>
+          <aside className="demo-playlist" aria-label="Demonstration playlist">
+            <p className="playlist-heading">Choose a demonstration</p>
+            <div className="playlist-items" role="tablist" aria-label="Choose a demonstration" aria-orientation="vertical">
+              {demos.map((demo, index) => <button key={demo.file} id={`demo-tab-${index}`} role="tab" aria-selected={selected === index} aria-controls="demo-panel" tabIndex={selected === index ? 0 : -1} className="playlist-item" onClick={() => {
+                requestedPlayback.current = true;
+                setLoadDemos(true);
+                if (window.matchMedia('(max-width: 900px)').matches) {
+                  document.getElementById('demo-panel')?.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'center' });
+                }
+                if (selected === index) demonstration.current?.play().catch(() => {});
+                else setSelected(index);
+              }} onKeyDown={event => {
+                if (['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) {
+                  event.preventDefault();
+                  const next = event.key === 'Home' ? 0 : event.key === 'End' ? demos.length - 1 : (index + (['ArrowDown', 'ArrowRight'].includes(event.key) ? 1 : demos.length - 1)) % demos.length;
+                  setSelected(next);
+                  document.getElementById(`demo-tab-${next}`)?.focus();
+                }
+              }}>
+                <span className="playlist-thumbnail"><img src={`/media/${demo.file}.jpg`} alt="" width="160" height="90" /><span className="playlist-play"><PlayIcon paused /></span></span>
+                <span className="playlist-copy">
+                  <span className="playlist-title">Watch {demo.category.toLowerCase()}</span>
+                  <span className="playlist-subtitle">{demo.name}</span>
+                  {selected === index && <span className="playlist-status"><span aria-hidden="true">●</span> {demoPaused ? 'Selected · paused' : 'Now playing'}</span>}
+                </span>
+              </button>)}
+            </div>
+          </aside>
           <div className="demo-caption"><p aria-live="polite">SOMA00 <span>/</span> {current.category}</p><span>Human motion, embodied.</span></div>
         </div>
       </section>
