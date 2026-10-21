@@ -1,3 +1,7 @@
 node_modules/
 .next/
 *.tsbuildinfo
+
+# Original video is reconstructed from checksum-verified parts before build/dev.
+soma00-vercel/public/media/simulation.mp4
+soma00-vercel/public/media/simulation.mp4.assembly-*

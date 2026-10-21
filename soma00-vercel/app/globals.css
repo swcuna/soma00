@@ -59,36 +59,60 @@
   .close-film { min-height: 44px; font-size: 12px; }
 }
 
-/* Thumbnail playlist preview: explicit video choices with a persistent selection. */
-.demonstrations > .section-shell { grid-template-columns: minmax(0, 1fr) 344px; column-gap: 28px; }
-.demo-playlist { grid-area: 2 / 2; min-width: 0; align-self: start; }
-.playlist-heading { color: var(--muted); font-size: 12px; line-height: 1.5; margin: 0 0 14px; }
-.playlist-items { display: flex; flex-direction: column; gap: 10px; }
-.playlist-item { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 14px; width: 100%; min-height: 100px; padding: 12px; border: 1px solid var(--rule); border-radius: 8px; background: white; color: var(--ink); text-align: left; transition: background .2s, border-color .2s; }
-.playlist-item:hover { background: #f7f7f8; border-color: #a9a9b2; }
-.playlist-item[aria-selected="true"] { background: var(--accent-soft); border-color: var(--violet); }
-.playlist-thumbnail { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: #eee; }
-.playlist-thumbnail img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.playlist-play { position: absolute; inset: 0; display: grid; place-content: center; color: white; background: #0003; }
-.playlist-play svg { width: 24px; height: 24px; padding: 4px; border-radius: 50%; background: #0009; }
-.playlist-copy { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-.playlist-title { font-size: 14px; font-weight: 600; line-height: 1.4; }
-.playlist-subtitle { color: var(--muted); font-size: 12px; line-height: 1.5; }
-.playlist-status { display: flex; align-items: center; gap: 6px; color: var(--accent-text); font-size: 11px; font-weight: 600; line-height: 1.5; }
-.playlist-status > span { font-size: 7px; }
-@media (max-width: 1000px) {
-  .demonstrations > .section-shell { grid-template-columns: minmax(0, 1fr) 304px; column-gap: 22px; }
-  .playlist-item { grid-template-columns: 76px minmax(0, 1fr); gap: 12px; }
-}
+/* Three independent films, presented together. */
+.demonstrations > .section-shell { display: block; }
+.demo-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.demo-card { min-width: 0; }
+.demo-card-media { aspect-ratio: 16 / 9; overflow: hidden; border-radius: 8px; background: var(--surface-raised); }
+.demo-card video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.demo-card-category { display: flex; align-items: center; gap: 12px; margin-top: 22px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.demo-card-category span { color: var(--accent-text); }
+.demo-card h3 { margin: 10px 0 12px; font-size: clamp(23px, 2.2vw, 32px); font-weight: 600; letter-spacing: -.04em; line-height: 1.2; }
+.demo-card-description { max-width: 38ch; color: var(--muted); font-size: 13px; line-height: 1.75; }
 @media (max-width: 900px) {
-  .demonstrations > .section-shell { display: flex; flex-direction: column; }
-  .demo-heading { order: 0; }
-  .demo-stage { order: 1; width: 100%; }
-  .demo-caption { order: 2; padding-top: 14px; }
-  .demo-playlist { order: 3; width: 100%; margin-top: 26px; }
-  .playlist-item { grid-template-columns: 104px minmax(0, 1fr); min-height: 94px; }
+  .demo-gallery { grid-template-columns: minmax(0, 1fr); gap: 40px; max-width: 620px; margin-inline: auto; }
+  .demo-card-category { margin-top: 18px; font-size: 12px; }
+  .demo-card h3 { font-size: 26px; }
+  .demo-card-description { max-width: 44ch; font-size: 14px; }
 }
-@media (max-width: 380px) {
-  .playlist-item { grid-template-columns: 76px minmax(0, 1fr); gap: 10px; padding: 10px; }
-  .playlist-title { font-size: 13px; }
+
+/* A wide opening composition unfolds into three independent films. */
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .demonstrations { --spread: 0; height: 175vh; padding: 0; position: relative; }
+  .demonstrations > .section-shell { position: sticky; top: 0; padding-block: clamp(40px, 8vh, 80px); }
+  .demo-gallery { grid-template-columns: var(--spread-columns, 3fr 0fr 0fr); gap: calc(28px * var(--spread)); }
+  .demo-card { overflow: hidden; min-width: 0; }
+  .demo-card-media { height: var(--film-height, 390px); aspect-ratio: auto; }
+  .demo-card video { object-fit: cover; }
+  .demo-card:not(:first-child) { opacity: clamp(0, calc(var(--spread) * 3 - .3), 1); }
+  .demo-card-category, .demo-card h3, .demo-card-description { opacity: clamp(0, calc(var(--spread) * 4 - 3), 1); transform: translateY(calc(12px * (1 - var(--spread)))); }
+  .demo-card-description { min-width: 200px; }
+  .demo-gallery:focus-within { grid-template-columns: repeat(3,minmax(0,1fr)); gap:28px; }
+  .demo-gallery:focus-within .demo-card, .demo-gallery:focus-within .demo-card-category, .demo-gallery:focus-within h3, .demo-gallery:focus-within .demo-card-description { opacity:1; transform:none; }
+}
+
+/* Reserve the headline's layout while letters arrive, once per page visit. */
+.closing .typed-closing .typing-line { display: block; color: var(--ink); }
+.closing .typed-closing .typing-line-1 { color: var(--muted); }
+.closing .typed-closing .typing-word { display: inline-block; white-space: pre; color: inherit; }
+.closing .typed-closing .typing-character { color: inherit; }
+@media (prefers-reduced-motion: reduce) {
+  .closing .typed-closing .typing-character { opacity: 1 !important; }
+}
+
+/* Reverse the opening film's small inset; fill the frame without letterboxing. */
+.expanding-film { background: var(--paper); padding-block: 18px; }
+.expanding-film-stage { position: relative; margin-inline: var(--gutter); }
+.expanding-film-frame { overflow: hidden; border-radius: 5px; background: #111; }
+.expanding-film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.expanding-film video:fullscreen { height: 100%; }
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .expanding-film { height: calc(min(100svh, 56.25vw) + 34svh); padding: 0; }
+  .expanding-film-stage { position: sticky; top: 0; height: min(100svh, 56.25vw); margin: 0; }
+  .expanding-film-frame {
+    position: absolute;
+    inset: calc(18px * (1 - var(--film-expand))) calc(var(--gutter) * (1 - var(--film-expand)));
+    border-radius: calc(5px * (1 - var(--film-expand)));
+  }
+  .expanding-film video { height: 100%; }
 }

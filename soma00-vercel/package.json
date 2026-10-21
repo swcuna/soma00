@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prepare:media": "node scripts/prepare-media.mjs",
+    "prebuild": "npm run prepare:media",
+    "predev": "npm run prepare:media"
   },
   "dependencies": {
     "next": "16.3.5",
